@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SynapRyde — Investor & Government Briefing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body { font-family: 'Sora', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'; }
+      .hidden-sec { display:none; }
+      .impact-text { letter-spacing:-0.01em; }
+    </style>
+  </head>
+  <body class="antialiased bg-neutral-950 text-white">
+    <!-- IMPACT LANDING (black screen) -->
+    <section id="impact" class="min-h-screen grid place-items-center bg-neutral-950">
+      <div class="max-w-5xl px-6 text-center">
+        <h1 class="impact-text font-semibold text-white text-4xl md:text-6xl leading-tight">
+          <span class="block">You can’t move more people</span>
+          <span class="block mt-4">with tiny pods</span>
+          <span class="block mt-4">than you can with a giant subway train…</span>
+        </h1>
+        <button id="impactCTA" class="mt-10 rounded-2xl px-6 py-3 text-lg font-medium bg-white text-neutral-900 hover:bg-neutral-200 transition">
+          …or can you? The answer will surprise you.
+        </button>
+      </div>
+    </section>
+
+    <!-- SIGNUP (manual approval only) -->
+    <section id="signup" class="hidden-sec">
+      <div class="mx-auto max-w-2xl px-6 pt-20 pb-16">
+        <div class="text-center">
+          <h1 class="text-3xl md:text-4xl font-semibold tracking-tight">Request secure access</h1>
+          <p class="mt-3 text-neutral-300">Submit your details to request approval. We'll notify you when your access is granted.</p>
+        </div>
+
+        <form id="regForm" class="mt-8 space-y-4 bg-white/5 rounded-2xl p-6 ring-1 ring-white/10">
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm text-neutral-300">Full Name</label>
+              <input id="name" required class="mt-1 w-full rounded-xl bg-neutral-900 text-white px-3 py-2 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+            </div>
+            <div>
+              <label class="text-sm text-neutral-300">Work Email</label>
+              <input id="email" required type="email" class="mt-1 w-full rounded-xl bg-neutral-900 text-white px-3 py-2 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+            </div>
+            <div>
+              <label class="text-sm text-neutral-300">Organization</label>
+              <input id="org" class="mt-1 w-full rounded-xl bg-neutral-900 text-white px-3 py-2 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+            </div>
+            <div>
+              <label class="text-sm text-neutral-300">Role</label>
+              <input id="role" class="mt-1 w-full rounded-xl bg-neutral-900 text-white px-3 py-2 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="text-sm text-neutral-300">Create Password</label>
+              <input id="pw" required type="password" class="mt-1 w-full rounded-xl bg-neutral-900 text-white px-3 py-2 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-3 text-sm text-neutral-300 mt-2">
+            <label class="inline-flex items-center gap-3">
+              <input id="nda" type="checkbox" class="rounded bg-neutral-900 ring-1 ring-white/10" required />
+              <span>I agree to keep the materials confidential (NDA-on-click).</span>
+            </label>
+            <label class="inline-flex items-center gap-3">
+              <input id="stay" type="checkbox" class="rounded bg-neutral-900 ring-1 ring-white/10" />
+              <span>Stay signed in (skip the black screen next time)</span>
+            </label>
+          </div>
+
+          <div class="flex items-center gap-3 mt-2">
+            <button class="rounded-xl bg-emerald-400 text-neutral-900 px-5 py-3 font-medium hover:bg-emerald-300 transition">Submit request</button>
+            <span id="regMsg" class="text-sm text-neutral-400"></span>
+          </div>
+
+          <p class="mt-3 text-xs text-neutral-500">Operator note: In production, we'll notify <strong>clayton@synapryde.ca</strong> automatically. In this demo, approve via the private <a href="#admin" class="underline">Admin</a> page.</p>
+        </form>
+
+        <p class="mt-6 text-xs text-neutral-500 text-center">Questions? Contact Clayton Balabanov • 1 (250) 533‑9104 • <a class="underline" href="mailto:clayton@synapryde.ca">clayton@synapryde.ca</a></p>
+      </div>
+    </section>
+
+    <!-- PENDING (full-screen thank-you page) -->
+    <section id="pending" class="hidden-sec min-h-screen bg-gradient-to-br from-emerald-500 via-emerald-400 to-sky-400 text-neutral-900 grid place-items-center">
+      <div class="max-w-3xl mx-auto px-6 py-16">
+        <div class="rounded-3xl bg-white/70 backdrop-blur p-8 ring-1 ring-black/10 shadow-xl">
+          <h2 class="text-3xl md:text-4xl font-semibold">Request received — thank you.</h2>
+          <p class="mt-3 text-neutral-700 text-lg">We appreciate your interest in SynapRyde. Your request is now in our review queue.</p>
+          <ul class="mt-4 text-neutral-800 text-sm list-disc list-inside space-y-1">
+            <li>Clayton will review and confirm access for qualified partners.</li>
+            <li>We'll reach out at <span id="pendingEmail" class="font-medium"></span> once approved.</li>
+            <li>If you need an expedited review, please get in touch.</li>
+          </ul>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="mailto:clayton@synapryde.ca" class="rounded-xl bg-neutral-900 text-white px-5 py-3 text-sm hover:bg-neutral-800">Email Clayton</a>
+            <a href="#impact" class="rounded-xl bg-white px-5 py-3 text-sm ring-1 ring-black/10 hover:bg-neutral-50">Back to start</a>
+          </div>
+          <div class="mt-4 text-xs text-neutral-700">Direct: 1 (250) 533‑9104 • <a href="mailto:clayton@synapryde.ca" class="underline">clayton@synapryde.ca</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMIN PAGE (private) -->
+    <section id="admin" class="hidden-sec">
+      <div class="mx-auto max-w-3xl px-6 pt-16 pb-16">
+        <h2 class="text-2xl font-semibold">Admin — approve access</h2>
+        <div class="mt-3 text-sm text-neutral-300">Private approval panel (demo). In production we'll replace this with a proper backend + email notifications.</div>
+
+        <div class="mt-6 rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+          <div class="flex items-center gap-3">
+            <input id="adminPin" type="password" placeholder="Enter admin PIN (demo: 0425)" class="rounded-xl bg-neutral-900 text-white px-3 py-2 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+            <button id="pinBtn" class="rounded-lg bg-white/10 px-4 py-2 text-sm hover:bg-white/20">Unlock</button>
+            <span id="pinMsg" class="text-sm text-neutral-400"></span>
+          </div>
+          <div id="adminPanel" class="hidden mt-5">
+            <h3 class="font-medium mb-2">Pending requests</h3>
+            <div id="pendingList" class="text-sm text-neutral-300"></div>
+          </div>
+        </div>
+        <div class="mt-6 flex gap-3">
+          <a href="#impact" class="rounded-xl bg-white/10 px-4 py-2 text-sm hover:bg-white/20">Back</a>
+          <button id="adminSignIn" class="rounded-xl bg-emerald-400 text-neutral-900 px-4 py-2 text-sm hover:bg-emerald-300">Grant myself access (demo)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF -->
+    <section id="proof" class="hidden-sec">
+      <div class="mx-auto max-w-3xl px-6 pt-20 pb-16">
+        <h1 class="text-3xl md:text-4xl font-semibold tracking-tight">Proof — Throughput & Cost</h1>
+        <p class="mt-3 text-neutral-300">Summary highlights below. Choose <strong>Details</strong> for the math, or <strong>More info</strong> for the broader overview.</p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <button id="detailsBtn" class="rounded-xl bg-white/10 px-5 py-3 text-sm hover:bg-white/20">Details</button>
+          <button id="moreInfoBtn" class="rounded-xl bg-emerald-400 text-neutral-900 px-5 py-3 text-sm hover:bg-emerald-300">More info</button>
+          <button id="signOutBtn" class="ml-auto rounded-xl bg-white/10 px-4 py-3 text-sm hover:bg-white/20">Sign out</button>
+        </div>
+
+        <div class="mt-8 grid md:grid-cols-2 gap-6">
+          <div class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+            <div class="text-sm text-neutral-400">Myth #1</div>
+            <div class="mt-1 font-semibold">“Pods can’t match subway throughput.”</div>
+            <ul class="mt-3 text-sm text-neutral-300 list-disc list-inside space-y-1">
+              <li>Pods @ 2/s × 2 pax = 14,400 pax/h/guideway</li>
+              <li>Trains: ~1,000 pax × 20/h = 20,000 pax/h/line</li>
+              <li>Network scaling: loops distribute demand; add lanes by adding loops.</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+            <div class="text-sm text-neutral-400">Myth #2</div>
+            <div class="mt-1 font-semibold">“Cost per passenger‑km is higher.”</div>
+            <ul class="mt-3 text-sm text-neutral-300 list-disc list-inside space-y-1">
+              <li>Capex: ~$1M/km vs ~$1B/km (order‑of‑magnitude delta)</li>
+              <li>Energy: no intermediate stops; regen braking; lower mass per passenger</li>
+              <li>Ops: autonomous 24/7; modular maintenance; high utilization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DETAILS -->
+    <section id="details" class="hidden-sec">
+      <div class="mx-auto max-w-3xl px-6 pt-10 pb-16">
+        <h2 class="text-2xl font-semibold">Detailed Assumptions & Calculations (Preview)</h2>
+        <div class="mt-4 text-sm text-neutral-300 space-y-2">
+          <p><strong>Guideway speed:</strong> 30–60 km/h nominal • <strong>Headway:</strong> 0.5–1.0 s effective (convoy control) • <strong>Pods:</strong> 2 seats</p>
+          <p><strong>Throughput formula:</strong> pax/h = (pods/sec × 3600) × seats × occ</p>
+          <p><strong>Example:</strong> 1 pod/sec × 3600 × 2 × 0.8 = <strong>5,760 pax/h</strong> per guideway (conservative). Higher with 2 pods/sec or multiple loops.</p>
+          <p><strong>Capex model:</strong> Elevated modular guideway + ports ≈ CAD ~$1M/km (target), scalable; compare to subway CAD ~$1B/km incl. tunneling.</p>
+        </div>
+        <div class="mt-6">
+          <a href="#proof" class="underline">Back</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GATED FULL PAGE (“More info”) -->
+    <section id="gated" class="hidden-sec">
+      <section class="relative overflow-hidden">
+        <div class="mx-auto max-w-7xl px-6 pt-20 pb-10">
+          <div class="max-w-4xl">
+            <h1 class="text-4xl md:text-5xl font-semibold tracking-tight">
+              “But it will cost more per passenger‑km.”
+            </h1>
+            <p class="mt-4 text-lg text-neutral-300">
+              That’s the second myth. The combination of ultra‑low capex, continuous flow, and high utilization changes the math.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="mx-auto max-w-7xl px-6 pb-20">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="rounded-3xl bg-neutral-900/60 ring-1 ring-white/10 p-6">
+            <h3 class="text-lg font-semibold">Low Capex</h3>
+            <p class="mt-2 text-sm text-neutral-300">Targeting ~$1M/km guideway, modular nodes; factory‑built for rapid install.</p>
+          </div>
+          <div class="rounded-3xl bg-neutral-900/60 ring-1 ring-white/10 p-6">
+            <h3 class="text-lg font-semibold">High Utilization</h3>
+            <p class="mt-2 text-sm text-neutral-300">Continuous operations, point‑to‑point; no long station dwells or off‑peak deadweight.</p>
+          </div>
+          <div class="rounded-3xl bg-neutral-900/60 ring-1 ring-white/10 p-6">
+            <h3 class="text-lg font-semibold">Energy Efficiency</h3>
+            <p class="mt-2 text-sm text-neutral-300">Lower mass per passenger, regenerative braking, and smooth profiles reduce kWh/pkm.</p>
+          </div>
+          <div class="rounded-3xl bg-neutral-900/60 ring-1 ring-white/10 p-6">
+            <h3 class="text-lg font-semibold">Scalable Network</h3>
+            <p class="mt-2 text-sm text-neutral-300">Loops add capacity like lanes; demand spreads across nodes instead of one bottleneck corridor.</p>
+          </div>
+        </div>
+
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a href="#proof" class="rounded-xl bg-white/10 px-5 py-3 text-sm hover:bg-white/20">Back to Proof</a>
+          <a href="#impact" class="rounded-xl bg-white/10 px-5 py-3 text-sm hover:bg-white/20">Back to Start</a>
+        </div>
+      </section>
+    </section>
+
+    <script>
+      const $ = id => document.getElementById(id);
+      const show = id => $(id).classList.remove('hidden-sec');
+      const hide = id => $(id).classList.add('hidden-sec');
+      const authed = () => localStorage.getItem('sr_authed') === '1';
+      const stayOn = () => localStorage.getItem('sr_stay') === '1';
+
+      function route() {
+        const h = (location.hash || '#impact').toLowerCase();
+        if ((h === '#impact' || h === '') && authed() && stayOn()) { location.hash = '#proof'; return; }
+        ['impact','signup','pending','admin','proof','details','gated'].forEach(hide);
+        if (h.includes('gated')) { if (authed()) show('gated'); else show('signup'); }
+        else if (h.includes('details')) { if (authed()) show('details'); else show('signup'); }
+        else if (h.includes('proof')) { if (authed()) show('proof'); else show('signup'); }
+        else if (h.includes('admin')) { show('admin'); }
+        else if (h.includes('pending')) { show('pending'); }
+        else if (h.includes('signup')) show('signup');
+        else show('impact');
+        window.scrollTo(0,0);
+      }
+
+      // Impact CTA
+      $('impactCTA').onclick = () => location.hash = '#signup';
+
+      // Signup handler (manual approval only)
+      $('regForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!$('nda').checked) return;
+        const record = { name: $('name').value, email: $('email').value, org: $('org').value, role: $('role').value, ts: Date.now(), stay: $('stay').checked ? '1':'0' };
+        const list = JSON.parse(localStorage.getItem('sr_pending') || '[]');
+        list.push(record);
+        localStorage.setItem('sr_pending', JSON.stringify(list));
+        localStorage.setItem('sr_last_email', $('email').value || '');
+        $('pendingEmail').textContent = $('email').value || '';
+        $('regMsg').textContent = 'Request sent for approval.';
+        location.hash = '#pending';
+      });
+
+      // Populate pending email if page refreshed
+      (function(){ const e = localStorage.getItem('sr_last_email') || ''; if (e) $('pendingEmail').textContent = e; })();
+
+      // Admin unlock and list pending
+      $('pinBtn').addEventListener('click', () => {
+        if ($('adminPin').value === '0425') {
+          $('pinMsg').textContent = 'Unlocked.';
+          const panel = $('adminPanel');
+          panel.classList.remove('hidden');
+          const list = JSON.parse(localStorage.getItem('sr_pending') || '[]');
+          const container = $('pendingList');
+          container.innerHTML = '';
+          if (!list.length) {
+            container.innerHTML = '<div class="text-neutral-400">No pending requests.</div>';
+          } else {
+            list.forEach((r, idx) => {
+              const row = document.createElement('div');
+              row.className = 'flex items-center justify-between gap-3 py-2 border-b border-white/10';
+              row.innerHTML = `<div><div class='font-medium'>${r.name} — ${r.email}</div><div class='text-neutral-400 text-xs'>${r.org || ''} ${r.role ? '• ' + r.role : ''}</div></div>`;
+              const btn = document.createElement('button');
+              btn.className = 'rounded-lg bg-emerald-400 text-neutral-900 px-3 py-1 text-xs hover:bg-emerald-300';
+              btn.textContent = 'Approve';
+              btn.onclick = () => {
+                // Approve: grant access on this device, respect stay flag
+                localStorage.setItem('sr_authed','1');
+                localStorage.setItem('sr_stay', r.stay === '1' ? '1' : '0');
+                list.splice(idx,1);
+                localStorage.setItem('sr_pending', JSON.stringify(list));
+                row.remove();
+                alert('Approved. Access granted on this device for demo. In production, approve from a secure admin UI and notify the user by email.');
+                location.hash = '#proof';
+              };
+              row.appendChild(btn);
+              container.appendChild(row);
+            });
+          }
+        } else {
+          $('pinMsg').textContent = 'Wrong PIN.';
+        }
+      });
+
+      // Demo quick sign-in for operator
+      $('adminSignIn').addEventListener('click', () => {
+        localStorage.setItem('sr_authed','1'); localStorage.setItem('sr_stay','1'); location.hash = '#proof';
+      });
+
+      // Proof actions
+      $('detailsBtn').onclick = () => location.hash = '#details';
+      $('moreInfoBtn').onclick = () => location.hash = '#gated';
+      $('signOutBtn').onclick = () => { localStorage.removeItem('sr_authed'); localStorage.removeItem('sr_stay'); location.hash = '#impact'; };
+
+      window.addEventListener('hashchange', route);
+      route();
+    </script>
+  </body>
+</html>

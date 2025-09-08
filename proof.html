@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SynapRyde — Proof (Private)</title>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Sora', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'; }
+    .impact-text { letter-spacing:-0.01em; }
+    .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; }
+    .icon-btn { position:absolute; right:.75rem; top:2.35rem; cursor:pointer; opacity:.8; }
+    .icon-btn:hover{ opacity:1; }
+  </style>
+
+</head>
+<body class="antialiased bg-neutral-950 text-white">
+  <header class="px-6 pt-6 flex items-center justify-between">
+    <a href="index.html" class="text-sm text-neutral-400 hover:underline">← Landing</a>
+    <button id="signOut" class="text-sm text-neutral-300 hover:underline">Sign out</button>
+  </header>
+  <main class="mx-auto max-w-3xl px-6 pt-6 pb-16">
+    <h1 class="text-3xl md:text-4xl font-semibold tracking-tight">Proof — Throughput & Cost</h1>
+    <p class="mt-3 text-neutral-300">Private brief. (We’ll expand this page next.)</p>
+
+    <div class="mt-8 grid md:grid-cols-2 gap-6">
+      <div class="card p-5">
+        <div class="text-sm text-neutral-400">Myth #1</div>
+        <div class="mt-1 font-semibold">“Pods can’t match subway throughput.”</div>
+        <ul class="mt-3 text-sm text-neutral-300 list-disc list-inside space-y-1">
+          <li>Pods @ 2/s × 2 pax = 14,400 pax/h/guideway</li>
+          <li>Trains: ~1,000 pax × 20/h = 20,000 pax/h/line</li>
+          <li>Network scaling: loops distribute demand; add lanes by adding loops.</li>
+        </ul>
+      </div>
+      <div class="card p-5">
+        <div class="text-sm text-neutral-400">Myth #2</div>
+        <div class="mt-1 font-semibold">“Cost per passenger‑km is higher.”</div>
+        <ul class="mt-3 text-sm text-neutral-300 list-disc list-inside space-y-1">
+          <li>Capex: ~$1M/km vs ~$1B/km (order‑of‑magnitude delta)</li>
+          <li>Energy: no intermediate stops; regen braking; lower mass per passenger</li>
+          <li>Ops: autonomous 24/7; modular maintenance; high utilization</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    if (localStorage.getItem('sr_authed')!=='1') { window.location.href = 'signup.html'; }
+    document.getElementById('signOut').addEventListener('click', function(){
+      localStorage.removeItem('sr_authed'); localStorage.removeItem('sr_stay'); window.location.href='index.html';
+    });
+  </script>
+</body>
+</html>

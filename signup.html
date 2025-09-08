@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SynapRyde — Request Access</title>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Sora', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'; }
+    .impact-text { letter-spacing:-0.01em; }
+    .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; }
+  </style>
+
+</head>
+<body class="antialiased bg-neutral-950 text-white">
+  <header class="px-6 pt-6">
+    <a href="index.html" class="text-sm text-neutral-400 hover:underline">← Back</a>
+  </header>
+  <main class="mx-auto max-w-2xl px-6 pt-6 pb-20">
+    <div class="text-center">
+      <h1 class="text-3xl md:text-4xl font-semibold tracking-tight">Request secure access</h1>
+      <p class="mt-3 text-neutral-300">Submit your details to request approval. We'll notify you when your access is granted.</p>
+    </div>
+
+    <form id="regForm" class="mt-8 space-y-4 card p-6">
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="text-sm text-neutral-300">Full Name</label>
+          <input id="name" required class="mt-1 w-full rounded-xl bg-neutral-900 text-white px-3 py-2 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+        </div>
+        <div>
+          <label class="text-sm text-neutral-300">Work Email</label>
+          <input id="email" required type="email" class="mt-1 w-full rounded-xl bg-neutral-900 text-white px-3 py-2 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+        </div>
+        <div>
+          <label class="text-sm text-neutral-300">Organization</label>
+          <input id="org" class="mt-1 w-full rounded-xl bg-neutral-900 text-white px-3 py-2 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+        </div>
+        <div>
+          <label class="text-sm text-neutral-300">Role</label>
+          <input id="role" class="mt-1 w-full rounded-xl bg-neutral-900 text-white px-3 py-2 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+        </div>
+        <div class="md:col-span-2">
+          <label class="text-sm text-neutral-300">Create Password</label>
+          <input id="pw" required type="password" class="mt-1 w-full rounded-xl bg-neutral-900 text-white px-3 py-2 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-3 text-sm text-neutral-300 mt-2">
+        <label class="inline-flex items-center gap-3">
+          <input id="nda" type="checkbox" class="rounded bg-neutral-900 ring-1 ring-white/10" required />
+          <span>I agree to keep the materials confidential (NDA-on-click).</span>
+        </label>
+        <label class="inline-flex items-center gap-3">
+          <input id="stay" type="checkbox" class="rounded bg-neutral-900 ring-1 ring-white/10" />
+          <span>Stay signed in (skip the black screen next time)</span>
+        </label>
+      </div>
+
+      <div class="flex items-center gap-3 mt-2">
+        <button class="rounded-xl bg-emerald-400 text-neutral-900 px-5 py-3 font-medium hover:bg-emerald-300 transition">Submit request</button>
+        <span id="regMsg" class="text-sm text-neutral-400"></span>
+      </div>
+
+      <p class="mt-3 text-xs text-neutral-500">Operator note: In production, we'll notify <strong>clayton@oye.one</strong> automatically. In this demo, approve via the private <a href="admin.html" class="underline">Admin</a> page.</p>
+    </form>
+
+    <p class="mt-6 text-xs text-neutral-500 text-center">Questions? Contact Clayton Balabanov • 1 (250) 533‑9104 • <a class="underline" href="mailto:clayton@oye.one">clayton@oye.one</a></p>
+  </main>
+
+  <script>
+    document.getElementById('regForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!document.getElementById('nda').checked) return;
+      var record = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        org: document.getElementById('org').value,
+        role: document.getElementById('role').value,
+        ts: Date.now(),
+        stay: document.getElementById('stay').checked ? '1':'0'
+      };
+      var list = JSON.parse(localStorage.getItem('sr_pending') || '[]');
+      list.push(record);
+      localStorage.setItem('sr_pending', JSON.stringify(list));
+      localStorage.setItem('sr_last_email', document.getElementById('email').value || '');
+      window.location.href = 'pending.html';
+    });
+  </script>
+</body>
+</html>
